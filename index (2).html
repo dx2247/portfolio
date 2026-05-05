@@ -1,0 +1,1844 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Dong Xia — HCDI Portfolio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;0,9..144,900;1,9..144,400&family=JetBrains+Mono:wght@400;500&family=Inter+Tight:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --cream: #f4efe6;
+    --cream-2: #ece5d6;
+    --ink: #1a1a1a;
+    --ink-soft: #2b2b2b;
+    --muted: #6b6258;
+    --line: #d6cdbb;
+    --teal: #2d8b8b;
+    --teal-deep: #1f6a6a;
+    --orange: #e8693a;
+    --orange-deep: #c4501f;
+    --paper: #fbf8f1;
+    --shadow: 0 1px 0 rgba(26,26,26,0.04), 0 12px 40px rgba(26,26,26,0.06);
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Inter Tight', system-ui, sans-serif;
+    background: var(--cream);
+    color: var(--ink);
+    font-size: 16px;
+    line-height: 1.55;
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  /* ── grain overlay ───────────────────────── */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 100;
+    opacity: 0.35;
+    mix-blend-mode: multiply;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.06 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+  }
+
+  /* ── nav ───────────────────────── */
+  nav.topnav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 50;
+    padding: 22px 48px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: linear-gradient(to bottom, rgba(244,239,230,0.92), rgba(244,239,230,0.7) 70%, rgba(244,239,230,0));
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+  }
+  nav .brand {
+    font-family: 'Fraunces', serif;
+    font-weight: 500;
+    font-style: italic;
+    font-size: 22px;
+    letter-spacing: -0.01em;
+  }
+  nav .brand span { color: var(--orange); }
+  nav ul {
+    list-style: none;
+    display: flex;
+    gap: 36px;
+    font-size: 13px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    font-weight: 500;
+  }
+  nav ul a {
+    color: var(--ink);
+    text-decoration: none;
+    position: relative;
+    padding-bottom: 4px;
+    transition: color .25s ease;
+  }
+  nav ul a::after {
+    content: '';
+    position: absolute;
+    left: 0; bottom: 0;
+    width: 0; height: 1px;
+    background: var(--orange);
+    transition: width .3s ease;
+  }
+  nav ul a:hover { color: var(--orange); }
+  nav ul a:hover::after { width: 100%; }
+
+  /* ── hero ───────────────────────── */
+  .hero {
+    min-height: 100vh;
+    padding: 140px 48px 80px;
+    position: relative;
+    display: grid;
+    grid-template-columns: 1.4fr 1fr;
+    gap: 80px;
+    align-items: center;
+  }
+  .hero-meta {
+    position: absolute;
+    top: 110px; right: 48px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--muted);
+    text-align: right;
+    line-height: 1.9;
+  }
+  .hero-meta .dot {
+    display: inline-block;
+    width: 6px; height: 6px;
+    background: var(--orange);
+    border-radius: 50%;
+    margin-right: 6px;
+    animation: pulse 2s ease-in-out infinite;
+  }
+  @keyframes pulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.4; transform: scale(0.8); }
+  }
+
+  .eyebrow {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 28px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .eyebrow::before {
+    content: '';
+    width: 28px; height: 1px;
+    background: var(--ink);
+  }
+
+  h1.display {
+    font-family: 'Fraunces', serif;
+    font-weight: 400;
+    font-size: clamp(56px, 9vw, 132px);
+    line-height: 0.92;
+    letter-spacing: -0.035em;
+    margin-bottom: 32px;
+  }
+  h1.display em {
+    font-style: italic;
+    font-weight: 300;
+    color: var(--orange);
+  }
+  h1.display .stroke {
+    -webkit-text-stroke: 1.5px var(--ink);
+    color: transparent;
+  }
+
+  .hero p.lede {
+    font-size: 19px;
+    line-height: 1.5;
+    color: var(--ink-soft);
+    max-width: 540px;
+    margin-bottom: 40px;
+    font-weight: 400;
+  }
+
+  .hero-cta {
+    display: flex;
+    gap: 16px;
+    align-items: center;
+  }
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 14px 26px;
+    border-radius: 999px;
+    font-size: 14px;
+    font-weight: 500;
+    text-decoration: none;
+    transition: all .3s cubic-bezier(.2,.8,.2,1);
+    letter-spacing: 0.01em;
+  }
+  .btn-primary {
+    background: var(--ink);
+    color: var(--cream);
+  }
+  .btn-primary:hover {
+    background: var(--orange);
+    transform: translateY(-2px);
+  }
+  .btn-ghost {
+    color: var(--ink);
+    border: 1px solid var(--line);
+  }
+  .btn-ghost:hover {
+    border-color: var(--ink);
+    background: var(--paper);
+  }
+  .btn .arr { transition: transform .3s ease; }
+  .btn:hover .arr { transform: translateX(4px); }
+
+  /* hero visual */
+  .hero-visual {
+    position: relative;
+    aspect-ratio: 1 / 1.2;
+    max-width: 480px;
+    justify-self: end;
+  }
+  .hero-shape {
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(circle at 30% 30%, var(--teal) 0%, var(--teal) 40%, transparent 41%),
+      radial-gradient(circle at 75% 65%, var(--orange) 0%, var(--orange) 32%, transparent 33%);
+    filter: blur(0.3px);
+    border-radius: 8px;
+    transform: rotate(-2deg);
+  }
+  .hero-card {
+    position: absolute;
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-radius: 4px;
+    padding: 18px 22px;
+    box-shadow: var(--shadow);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.05em;
+    line-height: 1.7;
+  }
+  .hero-card .label {
+    color: var(--muted);
+    text-transform: uppercase;
+    font-size: 9px;
+    letter-spacing: 0.15em;
+    margin-bottom: 6px;
+  }
+  .hero-card.c1 {
+    top: 8%; left: -6%;
+    transform: rotate(-3deg);
+    width: 200px;
+  }
+  .hero-card.c2 {
+    bottom: 12%; right: -4%;
+    transform: rotate(2.5deg);
+    width: 220px;
+  }
+  .hero-card.c3 {
+    top: 42%; right: 18%;
+    transform: rotate(-1deg);
+    background: var(--ink);
+    color: var(--cream);
+    width: 180px;
+  }
+  .hero-card.c3 .label { color: rgba(244,239,230,0.5); }
+
+  .floating-tag {
+    position: absolute;
+    top: -10px; left: 30%;
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-size: 14px;
+    color: var(--muted);
+    transform: rotate(-4deg);
+  }
+
+  /* ── section frame ───────────────────────── */
+  section {
+    padding: 120px 48px;
+    position: relative;
+  }
+
+  .section-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    border-bottom: 1px solid var(--line);
+    padding-bottom: 24px;
+    margin-bottom: 60px;
+  }
+  .section-head h2 {
+    font-family: 'Fraunces', serif;
+    font-weight: 400;
+    font-size: clamp(36px, 5vw, 64px);
+    line-height: 1;
+    letter-spacing: -0.02em;
+  }
+  .section-head h2 em {
+    font-style: italic;
+    color: var(--orange);
+    font-weight: 300;
+  }
+  .section-head .num {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    letter-spacing: 0.15em;
+    color: var(--muted);
+    text-transform: uppercase;
+  }
+
+  /* ── about ───────────────────────── */
+  #about {
+    background: var(--paper);
+    border-top: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+  }
+  .about-grid {
+    display: grid;
+    grid-template-columns: 1fr 1.2fr;
+    gap: 80px;
+    align-items: start;
+  }
+  .about-grid .lead-quote {
+    font-family: 'Fraunces', serif;
+    font-weight: 300;
+    font-size: clamp(28px, 3vw, 38px);
+    line-height: 1.25;
+    letter-spacing: -0.015em;
+    color: var(--ink);
+  }
+  .about-grid .lead-quote em {
+    font-style: italic;
+    color: var(--orange);
+  }
+  .about-text { font-size: 16px; line-height: 1.7; color: var(--ink-soft); }
+  .about-text p { margin-bottom: 18px; }
+  .about-text p:last-child { margin-bottom: 0; }
+
+  .meta-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 40px;
+    margin-top: 48px;
+    padding-top: 32px;
+    border-top: 1px solid var(--line);
+  }
+  .meta-grid .item .key {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    color: var(--muted);
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+  .meta-grid .item .val {
+    font-family: 'Fraunces', serif;
+    font-size: 18px;
+    line-height: 1.35;
+  }
+
+
+  /* ── work overview ───────────────────────── */
+  .work-overview {
+    margin-bottom: 96px;
+  }
+  .overview-intro {
+    max-width: 760px;
+    font-size: 16.5px;
+    line-height: 1.65;
+    color: var(--ink-soft);
+    margin: -28px 0 34px;
+  }
+  .overview-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+  }
+  .overview-card {
+    min-height: 360px;
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    padding: 28px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    text-decoration: none;
+    color: var(--ink);
+    box-shadow: var(--shadow);
+    transition: transform .28s cubic-bezier(.2,.8,.2,1), border-color .28s ease, background .28s ease;
+  }
+  .overview-card:hover {
+    transform: translateY(-6px);
+    border-color: var(--orange);
+    background: #fffaf0;
+  }
+  .overview-card .ocard-top {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+    align-items: flex-start;
+    margin-bottom: 34px;
+  }
+  .overview-card .onum {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.15em;
+    color: var(--orange);
+    text-transform: uppercase;
+  }
+  .overview-card .otype {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    color: var(--muted);
+    text-transform: uppercase;
+    text-align: right;
+    line-height: 1.5;
+  }
+  .overview-card h3 {
+    font-family: 'Fraunces', serif;
+    font-size: clamp(26px, 3vw, 36px);
+    font-weight: 400;
+    line-height: 1.05;
+    letter-spacing: -0.025em;
+    margin-bottom: 18px;
+  }
+  .overview-card h3 em { font-style: italic; color: var(--orange); font-weight: 300; }
+  .overview-card p {
+    font-size: 14.5px;
+    line-height: 1.6;
+    color: var(--ink-soft);
+    margin-bottom: 20px;
+  }
+  .overview-card .ocard-bottom {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 12px;
+    align-items: center;
+    padding-top: 20px;
+    border-top: 1px solid var(--line);
+  }
+  .overview-card .view {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--ink);
+  }
+  .overview-card .view span { color: var(--orange); }
+  .prototype-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--teal-deep);
+    text-decoration: none;
+    border-bottom: 1px solid rgba(31,106,106,0.35);
+    padding-bottom: 2px;
+  }
+  .prototype-link:hover { color: var(--orange); border-color: var(--orange); }
+
+  /* ── projects ───────────────────────── */
+  .project {
+    margin-bottom: 140px;
+    position: relative;
+  }
+  .project:last-child { margin-bottom: 0; }
+
+  .project-header {
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    gap: 32px;
+    align-items: baseline;
+    margin-bottom: 40px;
+    padding-bottom: 18px;
+    border-bottom: 1px solid var(--line);
+  }
+  .project-header .pnum {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    letter-spacing: 0.15em;
+    color: var(--orange);
+    text-transform: uppercase;
+  }
+  .project-header h3 {
+    font-family: 'Fraunces', serif;
+    font-weight: 400;
+    font-size: clamp(32px, 4.5vw, 56px);
+    line-height: 1;
+    letter-spacing: -0.025em;
+  }
+  .project-header h3 em {
+    font-style: italic;
+    font-weight: 300;
+  }
+  .project-header .ptype {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    color: var(--muted);
+    text-transform: uppercase;
+    text-align: right;
+  }
+
+  /* ── NeighborHub feature project ───────────────────────── */
+  .feature-hero {
+    display: grid;
+    grid-template-columns: 1.1fr 1fr;
+    gap: 56px;
+    margin-bottom: 64px;
+    align-items: center;
+  }
+
+  .feature-tagline {
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-weight: 300;
+    font-size: clamp(26px, 3vw, 36px);
+    line-height: 1.25;
+    letter-spacing: -0.015em;
+    margin-bottom: 28px;
+    color: var(--ink);
+  }
+  .feature-tagline strong {
+    font-style: normal;
+    font-weight: 500;
+    background: linear-gradient(180deg, transparent 60%, rgba(232,105,58,0.35) 60%);
+    padding: 0 4px;
+  }
+
+  .feature-desc {
+    font-size: 16.5px;
+    line-height: 1.65;
+    color: var(--ink-soft);
+    margin-bottom: 28px;
+  }
+
+  .pill-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  .pill {
+    padding: 7px 14px;
+    border-radius: 999px;
+    border: 1px solid var(--line);
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    background: var(--paper);
+    font-weight: 500;
+  }
+  .pill.solid {
+    background: var(--ink);
+    color: var(--cream);
+    border-color: var(--ink);
+  }
+
+  /* logo block */
+  .logo-block {
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    padding: 64px 40px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .logo-block::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at 50% 40%, rgba(45,139,139,0.08), transparent 60%);
+  }
+  .logo-block svg { position: relative; z-index: 1; }
+  .logo-block .name {
+    position: relative;
+    z-index: 1;
+    font-family: 'Inter Tight', sans-serif;
+    font-weight: 700;
+    font-size: 36px;
+    letter-spacing: -0.02em;
+    margin-top: 20px;
+    color: var(--ink);
+  }
+  .logo-block .tagline {
+    position: relative;
+    z-index: 1;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-top: 8px;
+  }
+
+  /* problem→solution flow */
+  .flow-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0;
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    overflow: hidden;
+    background: var(--paper);
+    margin: 50px 0;
+  }
+  .flow-cell {
+    padding: 28px 24px;
+    border-right: 1px solid var(--line);
+    position: relative;
+  }
+  .flow-cell:last-child { border-right: none; }
+  .flow-cell .cnum {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    color: var(--orange);
+    margin-bottom: 14px;
+  }
+  .flow-cell h4 {
+    font-family: 'Fraunces', serif;
+    font-weight: 500;
+    font-size: 19px;
+    line-height: 1.2;
+    margin-bottom: 8px;
+    letter-spacing: -0.01em;
+  }
+  .flow-cell p {
+    font-size: 13.5px;
+    line-height: 1.55;
+    color: var(--muted);
+  }
+  .flow-cell::after {
+    content: '→';
+    position: absolute;
+    right: -8px; top: 50%;
+    transform: translateY(-50%);
+    background: var(--paper);
+    width: 16px; height: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--orange);
+    font-size: 14px;
+    z-index: 2;
+  }
+  .flow-cell:last-child::after { display: none; }
+
+  /* two col content */
+  .twocol {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 56px;
+    margin-bottom: 56px;
+  }
+  .twocol .col h4 {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--orange);
+    margin-bottom: 20px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid var(--line);
+  }
+  .twocol .col p {
+    font-size: 15.5px;
+    line-height: 1.65;
+    color: var(--ink-soft);
+    margin-bottom: 16px;
+  }
+  .twocol ul {
+    list-style: none;
+    margin-top: 12px;
+  }
+  .twocol ul li {
+    font-size: 14.5px;
+    padding: 10px 0;
+    border-bottom: 1px solid var(--line);
+    color: var(--ink-soft);
+    display: flex;
+    gap: 14px;
+    align-items: baseline;
+  }
+  .twocol ul li::before {
+    content: counter(li, decimal-leading-zero);
+    counter-increment: li;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    color: var(--orange);
+    font-weight: 500;
+    min-width: 24px;
+  }
+  .twocol ul { counter-reset: li; }
+
+  /* feature list */
+  .feature-list {
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    padding: 48px;
+    margin: 56px 0;
+  }
+  .feature-list h4 {
+    font-family: 'Fraunces', serif;
+    font-size: 28px;
+    font-weight: 400;
+    margin-bottom: 32px;
+    letter-spacing: -0.015em;
+  }
+  .feature-list h4 em { font-style: italic; color: var(--orange); }
+  .feature-row {
+    display: grid;
+    grid-template-columns: 80px 1fr 2fr;
+    gap: 32px;
+    padding: 24px 0;
+    border-top: 1px solid var(--line);
+    align-items: baseline;
+  }
+  .feature-row:first-of-type { border-top: 1px solid var(--ink); }
+  .feature-row .fnum {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    color: var(--muted);
+  }
+  .feature-row .fname {
+    font-family: 'Fraunces', serif;
+    font-size: 20px;
+    font-weight: 500;
+    line-height: 1.25;
+    letter-spacing: -0.01em;
+  }
+  .feature-row .fdesc {
+    font-size: 14.5px;
+    line-height: 1.6;
+    color: var(--ink-soft);
+  }
+
+  /* journey timeline */
+  .journey {
+    margin: 60px 0;
+  }
+  .journey-track {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 24px;
+    position: relative;
+  }
+  .journey-track::before {
+    content: '';
+    position: absolute;
+    top: 22px; left: 24px; right: 24px;
+    height: 1px;
+    background: var(--line);
+    z-index: 0;
+  }
+  .stage {
+    position: relative;
+    z-index: 1;
+  }
+  .stage .dot {
+    width: 14px; height: 14px;
+    border-radius: 50%;
+    background: var(--cream);
+    border: 1.5px solid var(--ink);
+    margin-bottom: 28px;
+    margin-top: 14px;
+  }
+  .stage:nth-child(1) .dot { background: var(--orange); border-color: var(--orange); }
+  .stage:nth-child(6) .dot { background: var(--teal); border-color: var(--teal); }
+  .stage .stage-num {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.15em;
+    color: var(--muted);
+    margin-bottom: 6px;
+  }
+  .stage h5 {
+    font-family: 'Fraunces', serif;
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 1.2;
+    margin-bottom: 8px;
+    letter-spacing: -0.01em;
+  }
+  .stage p {
+    font-size: 12.5px;
+    line-height: 1.5;
+    color: var(--muted);
+  }
+
+  /* comparison table */
+  .compare {
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    overflow: hidden;
+    margin: 56px 0;
+    background: var(--paper);
+  }
+  .compare table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14px;
+  }
+  .compare thead th {
+    background: var(--ink);
+    color: var(--cream);
+    text-align: left;
+    padding: 18px 20px;
+    font-weight: 500;
+    font-size: 12px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    border-right: 1px solid #333;
+  }
+  .compare thead th:first-child { background: var(--ink-soft); }
+  .compare thead th.us { background: var(--orange); border-color: var(--orange-deep); }
+  .compare tbody td {
+    padding: 16px 20px;
+    border-top: 1px solid var(--line);
+    border-right: 1px solid var(--line);
+  }
+  .compare tbody td:first-child {
+    font-weight: 500;
+    background: var(--cream-2);
+    font-family: 'Fraunces', serif;
+    font-size: 15px;
+  }
+  .compare tbody td.us { background: rgba(232,105,58,0.06); }
+  .compare .yes { color: var(--teal-deep); font-weight: 600; font-size: 15px; }
+  .compare .no { color: #b04a3a; font-weight: 600; font-size: 15px; }
+  .compare .partial { color: #b8860b; font-weight: 600; font-size: 15px; }
+
+  /* takeaway */
+  .takeaway {
+    background: var(--ink);
+    color: var(--cream);
+    padding: 56px;
+    border-radius: 6px;
+    position: relative;
+    overflow: hidden;
+    margin-top: 60px;
+  }
+  .takeaway::before {
+    content: '';
+    position: absolute;
+    top: -40px; right: -40px;
+    width: 200px; height: 200px;
+    background: radial-gradient(circle, rgba(232,105,58,0.4), transparent 70%);
+  }
+  .takeaway .tlabel {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--orange);
+    margin-bottom: 18px;
+  }
+  .takeaway h4 {
+    font-family: 'Fraunces', serif;
+    font-weight: 300;
+    font-size: clamp(24px, 2.6vw, 32px);
+    line-height: 1.3;
+    letter-spacing: -0.015em;
+    max-width: 800px;
+    position: relative;
+    z-index: 1;
+  }
+  .takeaway h4 em {
+    font-style: italic;
+    color: var(--orange);
+  }
+
+  /* coat project layout */
+  .coat-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 32px;
+    margin-bottom: 56px;
+  }
+  .coat-card {
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    padding: 28px;
+    position: relative;
+  }
+  .coat-card.highlight {
+    background: var(--ink);
+    color: var(--cream);
+    border-color: var(--ink);
+  }
+  .coat-card .stage-tag {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 16px;
+  }
+  .coat-card.highlight .stage-tag { color: var(--orange); }
+  .coat-card h4 {
+    font-family: 'Fraunces', serif;
+    font-size: 22px;
+    font-weight: 500;
+    line-height: 1.2;
+    margin-bottom: 14px;
+    letter-spacing: -0.01em;
+  }
+  .coat-card p {
+    font-size: 14px;
+    line-height: 1.6;
+    color: var(--muted);
+    margin-bottom: 12px;
+  }
+  .coat-card.highlight p { color: rgba(244,239,230,0.7); }
+  .coat-card ul {
+    list-style: none;
+    margin-top: 12px;
+  }
+  .coat-card ul li {
+    font-size: 13px;
+    padding: 8px 0;
+    border-top: 1px solid var(--line);
+    color: var(--ink-soft);
+    line-height: 1.5;
+  }
+  .coat-card.highlight ul li {
+    border-color: rgba(244,239,230,0.15);
+    color: rgba(244,239,230,0.85);
+  }
+  .coat-card .check {
+    position: absolute;
+    top: 24px; right: 24px;
+    width: 28px; height: 28px;
+    border-radius: 50%;
+    background: var(--orange);
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+  }
+
+  /* coffee table — single col */
+  .coffee-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 56px;
+    align-items: start;
+  }
+  .sketch-frame {
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    padding: 32px;
+    position: relative;
+  }
+  .sketch-frame .sk-label {
+    position: absolute;
+    top: 12px; left: 16px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+  .sketch-frame .sk-label::before {
+    content: '◇';
+    margin-right: 6px;
+    color: var(--orange);
+  }
+
+  /* footer */
+  footer {
+    background: var(--ink);
+    color: var(--cream);
+    padding: 100px 48px 40px;
+    position: relative;
+    overflow: hidden;
+  }
+  footer::before {
+    content: '';
+    position: absolute;
+    top: -200px; left: -100px;
+    width: 600px; height: 400px;
+    background: radial-gradient(ellipse, rgba(232,105,58,0.18), transparent 60%);
+  }
+  footer .ftop {
+    border-bottom: 1px solid rgba(244,239,230,0.15);
+    padding-bottom: 60px;
+    margin-bottom: 40px;
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 80px;
+    position: relative;
+  }
+  footer h2 {
+    font-family: 'Fraunces', serif;
+    font-weight: 300;
+    font-size: clamp(40px, 6vw, 84px);
+    line-height: 0.95;
+    letter-spacing: -0.025em;
+  }
+  footer h2 em {
+    font-style: italic;
+    color: var(--orange);
+  }
+  footer .fmeta {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    color: rgba(244,239,230,0.6);
+    line-height: 2;
+  }
+  footer .fmeta a {
+    color: var(--cream);
+    text-decoration: none;
+    border-bottom: 1px solid rgba(244,239,230,0.3);
+    transition: border-color .2s;
+  }
+  footer .fmeta a:hover { border-color: var(--orange); }
+  footer .fbottom {
+    display: flex;
+    justify-content: space-between;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: rgba(244,239,230,0.5);
+  }
+
+  /* fade in */
+  .reveal {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity .8s ease, transform .8s ease;
+  }
+  .reveal.in {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* ── responsive ───────────────────────── */
+  @media (max-width: 960px) {
+    nav.topnav { padding: 18px 24px; }
+    nav ul { gap: 18px; font-size: 11px; }
+    section { padding: 80px 24px; }
+    .hero { padding: 120px 24px 60px; grid-template-columns: 1fr; gap: 60px; }
+    .hero-meta { display: none; }
+    .hero-visual { max-width: 100%; aspect-ratio: 1.2/1; }
+    .about-grid { grid-template-columns: 1fr; gap: 40px; }
+    .meta-grid { grid-template-columns: 1fr; gap: 24px; }
+    .overview-grid { grid-template-columns: 1fr; }
+    .overview-card { min-height: auto; }
+        .feature-hero { grid-template-columns: 1fr; }
+    .flow-grid { grid-template-columns: 1fr 1fr; }
+    .flow-cell { border-right: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+    .flow-cell:nth-child(2) { border-right: none; }
+    .flow-cell::after { display: none; }
+    .twocol { grid-template-columns: 1fr; gap: 32px; }
+    .feature-row { grid-template-columns: 50px 1fr; }
+    .feature-row .fdesc { grid-column: 1 / -1; padding-left: 0; }
+    .journey-track { grid-template-columns: 1fr 1fr; }
+    .journey-track::before { display: none; }
+    .coat-grid { grid-template-columns: 1fr; }
+    .coffee-grid { grid-template-columns: 1fr; }
+    .project-header { grid-template-columns: 1fr; gap: 8px; }
+    .project-header .ptype { text-align: left; }
+    .feature-list { padding: 28px; }
+    .takeaway { padding: 32px; }
+    footer .ftop { grid-template-columns: 1fr; gap: 40px; }
+    footer .fbottom { flex-direction: column; gap: 12px; }
+    .compare { overflow-x: auto; }
+  }
+</style>
+</head>
+<body>
+
+<nav class="topnav">
+  <div class="brand">Dong <span>Xia</span></div>
+  <ul>
+    <li><a href="#about">About</a></li>
+    <li><a href="#work-overview">Work</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- ────────── HERO ────────── -->
+<section class="hero">
+  <div class="hero-meta">
+    <div><span class="dot"></span>HCDI · Section 2 · Team 13</div>
+    <div>Columbia Engineering · 2025</div>
+    <div>New York, NY</div>
+  </div>
+
+  <div class="hero-text">
+    <div class="eyebrow">Portfolio · Human-Centered Design &amp; Innovation</div>
+    <h1 class="display">
+      Designing for<br />
+      <em>everyday</em> <span class="stroke">resilience</span>
+    </h1>
+    <p class="lede">
+      A collection of human-centered design work exploring how thoughtful systems —
+      from neighborhood platforms to a winter coat — can help people feel prepared,
+      connected, and at home in the city.
+    </p>
+    <div class="hero-cta">
+      <a href="#work-overview" class="btn btn-primary">View work <span class="arr">→</span></a>
+      <a href="#about" class="btn btn-ghost">About me</a>
+    </div>
+  </div>
+
+  <div class="hero-visual">
+    <div class="hero-shape"></div>
+    <div class="floating-tag">A semester of fieldwork &amp; making.</div>
+    <div class="hero-card c1">
+      <div class="label">Project 01</div>
+      NeighborHub<br />Hyperlocal mutual aid
+    </div>
+    <div class="hero-card c2">
+      <div class="label">Project 02</div>
+      Effortless Elegant<br />Winter Coat
+    </div>
+    <div class="hero-card c3">
+      <div class="label">Project 03</div>
+      Lift-Top Coffee Table<br />Small-apt living
+    </div>
+  </div>
+</section>
+
+<!-- ────────── ABOUT ────────── -->
+<section id="about">
+  <div class="section-head">
+    <h2>A bit <em>about</em> me</h2>
+    <span class="num">§ 01 / Profile</span>
+  </div>
+
+  <div class="about-grid">
+    <p class="lead-quote">
+      I'm a designer interested in the <em>quiet infrastructure</em> of everyday life —
+      the systems people lean on without noticing, until they break.
+    </p>
+    <div class="about-text">
+      <p>
+        I'm pursuing an MS in Management Science &amp; Engineering at Columbia University
+        and studying Human-Centered Design &amp; Innovation. My work sits at the intersection
+        of research, systems thinking, and craft — I like talking to people, mapping how
+        things actually work, and translating what I learn into objects, services, and
+        interfaces that feel considered.
+      </p>
+      <p>
+        This portfolio collects three projects from a single semester. They look very
+        different on the surface — a digital platform, a winter coat, a piece of furniture —
+        but they share a question: <em>how do we design for the moments when life
+        gets a little harder than it should be?</em>
+      </p>
+
+      <div class="meta-grid">
+        <div class="item">
+          <div class="key">Based in</div>
+          <div class="val">New York City</div>
+        </div>
+        <div class="item">
+          <div class="key">Studying</div>
+          <div class="val">MS&amp;E · Columbia<br />University</div>
+        </div>
+        <div class="item">
+          <div class="key">Methods</div>
+          <div class="val">Research, sketching, prototyping, co-design</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ────────── PROJECTS ────────── -->
+<section id="projects">
+  <div class="section-head">
+    <h2>Selected <em>work</em></h2>
+    <span class="num">§ 02 / Projects</span>
+  </div>
+
+  <div id="work-overview" class="work-overview">
+    <p class="overview-intro">
+      Three final products from Human-Centered Design &amp; Innovation, organized as a quick gallery first.
+      Each card gives the core idea and links into the full case study below.
+    </p>
+
+    <div class="overview-grid">
+      <a class="overview-card" href="#neighborhub">
+        <div>
+          <div class="ocard-top">
+            <span class="onum">01</span>
+            <span class="otype">Service Design<br />Team Project</span>
+          </div>
+          <h3>NeighborHub <em>prototype</em></h3>
+          <p>A verified hyperlocal mutual-aid app that helps neighbors request, offer, and coordinate help before and during urban disruptions.</p>
+          <div class="pill-row">
+            <span class="pill solid">Mobile App</span>
+            <span class="pill">Mutual Aid</span>
+            <span class="pill">Field Research</span>
+          </div>
+        </div>
+        <div class="ocard-bottom">
+          <span class="view">View case study <span>→</span></span>
+        </div>
+      </a>
+
+      <a class="overview-card" href="#coat-design">
+        <div>
+          <div class="ocard-top">
+            <span class="onum">02</span>
+            <span class="otype">Co-design<br />Individual</span>
+          </div>
+          <h3>Effortless Elegant <em>winter coat</em></h3>
+          <p>A warm, lightweight, polished coat concept designed through client interview, sketching, AI variation, and co-design iteration.</p>
+          <div class="pill-row">
+            <span class="pill solid">Co-design</span>
+            <span class="pill">Sketching</span>
+            <span class="pill">Iteration</span>
+          </div>
+        </div>
+        <div class="ocard-bottom">
+          <span class="view">View case study <span>→</span></span>
+        </div>
+      </a>
+
+      <a class="overview-card" href="#coffee-table">
+        <div>
+          <div class="ocard-top">
+            <span class="onum">03</span>
+            <span class="otype">Object Design<br />Individual</span>
+          </div>
+          <h3>Lift-Top <em>coffee table</em></h3>
+          <p>A multi-functional furniture concept for small-apartment living, combining work, dining, hosting, and hidden storage.</p>
+          <div class="pill-row">
+            <span class="pill solid">Furniture</span>
+            <span class="pill">Small-space living</span>
+            <span class="pill">Prototype logic</span>
+          </div>
+        </div>
+        <div class="ocard-bottom">
+          <span class="view">View case study <span>→</span></span>
+        </div>
+      </a>
+    </div>
+  </div>
+
+  <!-- ============= PROJECT 01 — NEIGHBORHUB ============= -->
+  <div id="neighborhub" class="project">
+    <div class="project-header">
+      <span class="pnum">01 — Capstone</span>
+      <h3>NeighborHub <em>— hyperlocal mutual aid for NYC</em></h3>
+      <span class="ptype">Service Design<br />Team Project</span>
+    </div>
+
+    <div class="feature-hero">
+      <div>
+        <p class="feature-tagline">
+          A platform that connects NYC neighbors to <strong>request and offer help</strong>
+          — before, during, and after disruptions.
+        </p>
+        <p class="feature-desc">
+          NeighborHub is a verified, hyperlocal service that helps residents build
+          everyday trust before disasters and coordinate urgent support during them.
+          When the subway floods, the power cuts out, or the corner store sells out
+          of milk, neighbors are willing to help — but there's no scalable, trusted
+          way to find each other. We designed one.
+        </p>
+        <div class="pill-row">
+          <span class="pill solid">Service Design</span>
+          <span class="pill">Field Research</span>
+          <span class="pill">User Testing</span>
+          <span class="pill">Mobile App</span>
+          <span class="pill">Mutual Aid</span>
+        </div>
+        <div class="hero-cta" style="margin-top:24px;">
+          <a href="https://www.figma.com/make/P1nRtEeRbqjln7xvkD5BXA/Continue-NeighborHub-App?fullscreen=1&amp;t=5wfeYwaJZOLL1dwl-1" target="_blank" rel="noopener" class="btn btn-primary">Open Figma prototype <span class="arr">→</span></a>
+          <a href="#work-overview" class="btn btn-ghost">Back to overview</a>
+        </div>
+      </div>
+
+      <div class="logo-block">
+        <!-- NeighborHub icon recreated as SVG -->
+        <svg width="140" height="140" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+          <!-- house body -->
+          <path d="M40 90 L100 40 L160 90 L160 170 L40 170 Z" fill="#2d8b8b"/>
+          <!-- left orange roof -->
+          <path d="M30 95 L100 35 L100 55 L48 95 Z" fill="#e8693a"/>
+          <!-- right orange roof accent -->
+          <path d="M100 35 L170 95 L155 95 L100 50 Z" fill="#e8693a"/>
+          <!-- chimney -->
+          <rect x="140" y="55" width="14" height="30" fill="#c4501f"/>
+          <!-- floor accent -->
+          <rect x="40" y="160" width="40" height="10" fill="#1f6a6a"/>
+          <rect x="120" y="160" width="40" height="10" fill="#e8693a"/>
+          <!-- speech bubble -->
+          <ellipse cx="100" cy="100" rx="28" ry="20" fill="#fbf8f1"/>
+          <path d="M88 115 L92 125 L98 117 Z" fill="#fbf8f1"/>
+          <rect x="88" y="96" width="8" height="4" rx="1" fill="#e8693a"/>
+          <rect x="98" y="96" width="8" height="4" rx="1" fill="#e8693a"/>
+          <rect x="108" y="96" width="6" height="4" rx="1" fill="#e8693a"/>
+          <!-- hands -->
+          <path d="M82 138 Q88 128 96 132 L100 140 L104 132 Q112 128 118 138 Q116 148 110 150 L100 150 L90 150 Q84 148 82 138 Z" fill="#fbf8f1" stroke="#fbf8f1"/>
+        </svg>
+        <div class="name">NeighborHub</div>
+        <div class="tagline">Help nearby · trust local</div>
+      </div>
+    </div>
+
+    <!-- problem flow -->
+    <div class="flow-grid">
+      <div class="flow-cell">
+        <div class="cnum">PROBLEM · 01</div>
+        <h4>Structural Vulnerability</h4>
+        <p>Small apartments, frequent grocery trips, total reliance on transit and delivery.</p>
+      </div>
+      <div class="flow-cell">
+        <div class="cnum">PROBLEM · 02</div>
+        <h4>Information Gap</h4>
+        <p>No real-time view of what's still available or when supply will return.</p>
+      </div>
+      <div class="flow-cell">
+        <div class="cnum">PROBLEM · 03</div>
+        <h4>Stockpiling Behavior</h4>
+        <p>Uncertainty triggers panic-buying that empties shelves before scarcity is real.</p>
+      </div>
+      <div class="flow-cell">
+        <div class="cnum">PROBLEM · 04</div>
+        <h4>Disproportionate Impact</h4>
+        <p>People without strong networks or mobility absorb the cost.</p>
+      </div>
+    </div>
+
+    <!-- research -->
+    <div class="twocol">
+      <div class="col">
+        <h4>Research · Primary</h4>
+        <p>
+          We interviewed NYC residents across age and life stage — from recent grads
+          in Hell's Kitchen to a 79-year-old in her own building — about how they
+          navigate food access during snowstorms, subway disruptions, and short power
+          outages. A consistent theme emerged: <em>"It's not that I think there will
+          be no food. I just don't know how hard it will be to get it."</em>
+        </p>
+      </div>
+      <div class="col">
+        <h4>Research · Secondary</h4>
+        <p>
+          We reviewed reporting and academic work on Hurricane Sandy, the 2003 and 2019
+          NYC blackouts, and the 2025 SNAP interruption. The pattern was clear: shortages
+          during urban disruptions are rarely caused by lack of supply. They emerge from
+          breakdowns in coordination — between transit, retail, delivery labor, and
+          information flow.
+        </p>
+      </div>
+    </div>
+
+    <!-- problem statement -->
+    <div class="takeaway" style="margin-top: 0; margin-bottom: 60px;">
+      <div class="tlabel">Problem Statement · Group</div>
+      <h4>
+        New York's infrastructure is designed to run efficiently in normal conditions,
+        but offers <em>little built-in support</em> for residents when systems
+        temporarily fail. During the first hours of disruption, there is no
+        coordinated, resident-centered mechanism to stabilize essential access —
+        leaving individuals to improvise their own recovery.
+      </h4>
+    </div>
+
+    <!-- ideation evaluation -->
+    <h4 style="font-family:'Fraunces',serif;font-size:24px;font-weight:400;margin-bottom:18px;letter-spacing:-0.015em;">
+      Three concepts → one direction
+    </h4>
+    <p style="font-size:15.5px;line-height:1.65;color:var(--ink-soft);margin-bottom:24px;max-width:780px;">
+      We sketched three solutions and tested them with four NYC residents. Each was
+      rated on a skeptical-to-confident scale and discussed openly. The pivot came
+      not from the highest score, but from listening to <em>why</em> people responded
+      the way they did.
+    </p>
+
+    <div class="compare">
+      <table>
+        <thead>
+          <tr>
+            <th>Concept</th>
+            <th>Avg. confidence</th>
+            <th>What people said</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Real-time food map</td>
+            <td><span class="yes">6.4</span></td>
+            <td>Wanted exact stock counts; worried about wifi during disasters.</td>
+          </tr>
+          <tr>
+            <td>Apartment pantry</td>
+            <td><span class="partial">4.3</span></td>
+            <td>Concerns about freshness, food preferences, building conditions.</td>
+          </tr>
+          <tr>
+            <td>Emergency pickup network</td>
+            <td><span class="yes">5.8</span></td>
+            <td>Felt similar to existing food banks; questions about who runs it.</td>
+          </tr>
+          <tr>
+            <td>Status quo (delivery apps)</td>
+            <td><span class="no">3.4</span></td>
+            <td>Too expensive, unreliable, unavailable when most needed.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p style="font-size:15.5px;line-height:1.65;color:var(--ink-soft);margin: 0 0 16px;max-width:780px;">
+      Across all three concepts, one thread kept surfacing in interviews: people
+      wanted a <em>person</em>, not a system. Specifically, they wanted to feel like
+      someone nearby had their back. So we pivoted away from the inventory map and
+      toward the relationship — and <strong style="font-weight:600;">NeighborHub</strong> emerged.
+    </p>
+
+    <!-- the solution -->
+    <div class="feature-list">
+      <h4>The product, <em>at a glance</em></h4>
+
+      <div class="feature-row">
+        <span class="fnum">F · 01</span>
+        <div class="fname">Verified Neighborhood Network</div>
+        <div class="fdesc">
+          Residents join through address verification — a utility bill or lease confirms
+          they actually live in the area. Users are auto-grouped into a 4-block radius
+          neighborhood, large enough to be useful, small enough to feel real.
+        </div>
+      </div>
+      <div class="feature-row">
+        <span class="fnum">F · 02</span>
+        <div class="fname">Everyday Mutual Aid</div>
+        <div class="fdesc">
+          Before any disaster, low-stakes exchanges build familiarity: borrowing a
+          ladder, sharing leftovers, lending a charger, checking in on a neighbor. The
+          network gets warm before it has to work hard.
+        </div>
+      </div>
+      <div class="feature-row">
+        <span class="fnum">F · 03</span>
+        <div class="fname">Crisis Coordination Mode</div>
+        <div class="fdesc">
+          During disruptions, urgent posts are surfaced through push notifications,
+          tagged with location and need, and routed by proximity rather than by feed
+          chronology. No scrolling — direct connections.
+        </div>
+      </div>
+      <div class="feature-row">
+        <span class="fnum">F · 04</span>
+        <div class="fname">Trust &amp; Privacy</div>
+        <div class="fdesc">
+          Reviews, ratings, in-app messaging only, exact addresses hidden. The system
+          is funded as public infrastructure rather than ad-supported — data never
+          becomes the product.
+        </div>
+      </div>
+    </div>
+
+    <!-- user journey -->
+    <h4 style="font-family:'Fraunces',serif;font-size:24px;font-weight:400;margin-bottom:8px;letter-spacing:-0.015em;">
+      From quiet to crisis — one continuous experience
+    </h4>
+    <p style="font-size:15px;color:var(--muted);margin-bottom:0;max-width:680px;">
+      The system is designed so trust built in calm times activates instantly during disruption.
+    </p>
+
+    <div class="journey">
+      <div class="journey-track">
+        <div class="stage">
+          <div class="dot"></div>
+          <div class="stage-num">PRE · 01</div>
+          <h5>Verify identity</h5>
+          <p>Address + ID confirms a real local.</p>
+        </div>
+        <div class="stage">
+          <div class="dot"></div>
+          <div class="stage-num">PRE · 02</div>
+          <h5>Auto-join</h5>
+          <p>4-block neighborhood assigned.</p>
+        </div>
+        <div class="stage">
+          <div class="dot"></div>
+          <div class="stage-num">PRE · 03</div>
+          <h5>Build trust</h5>
+          <p>Small daily exchanges, light reviews.</p>
+        </div>
+        <div class="stage">
+          <div class="dot"></div>
+          <div class="stage-num">EVENT</div>
+          <h5>Crisis arrives</h5>
+          <p>Power, transit, weather, etc.</p>
+        </div>
+        <div class="stage">
+          <div class="dot"></div>
+          <div class="stage-num">POST · 01</div>
+          <h5>Urgent match</h5>
+          <p>Nearby verified neighbors notified.</p>
+        </div>
+        <div class="stage">
+          <div class="dot"></div>
+          <div class="stage-num">POST · 02</div>
+          <h5>Resolve · review</h5>
+          <p>Help delivered, trust strengthens.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- comparison -->
+    <h4 style="font-family:'Fraunces',serif;font-size:24px;font-weight:400;margin: 60px 0 24px;letter-spacing:-0.015em;">
+      Why not just use what exists?
+    </h4>
+
+    <div class="compare">
+      <table>
+        <thead>
+          <tr>
+            <th></th>
+            <th class="us">NeighborHub</th>
+            <th>Facebook Groups</th>
+            <th>Buy Nothing</th>
+            <th>Nextdoor</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Hyperlocal boundary</td>
+            <td class="us"><span class="yes">✓</span></td>
+            <td><span class="no">✗</span></td>
+            <td><span class="yes">✓</span></td>
+            <td><span class="yes">✓</span></td>
+          </tr>
+          <tr>
+            <td>Verified profiles</td>
+            <td class="us"><span class="yes">✓</span></td>
+            <td><span class="no">✗</span></td>
+            <td><span class="partial">~</span></td>
+            <td><span class="no">✗</span></td>
+          </tr>
+          <tr>
+            <td>Ad-free (no data sales)</td>
+            <td class="us"><span class="yes">✓</span></td>
+            <td><span class="no">✗</span></td>
+            <td><span class="yes">✓</span></td>
+            <td><span class="no">✗</span></td>
+          </tr>
+          <tr>
+            <td>Structured help requests</td>
+            <td class="us"><span class="yes">✓</span></td>
+            <td><span class="no">✗</span></td>
+            <td><span class="no">✗</span></td>
+            <td><span class="no">✗</span></td>
+          </tr>
+          <tr>
+            <td>Reliability tracking</td>
+            <td class="us"><span class="yes">✓</span></td>
+            <td><span class="partial">~</span></td>
+            <td><span class="no">✗</span></td>
+            <td><span class="no">✗</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- my role -->
+    <div class="twocol" style="margin-top:60px;">
+      <div class="col">
+        <h4>My Role</h4>
+        <p>
+          As one of four team members, I led primary research on the
+          <em>infrastructure-dependence</em> angle — interviewing a young finance
+          professional in Midtown about how she navigated food access during winter
+          storms, and translating that into our individual problem statement. I
+          contributed to ideation, the user-journey mapping, the comparison framework,
+          and the prototype's pre-disaster trust-building flow.
+        </p>
+        <p>
+          The rest of our team (Ayano, Maria, and Stella) brought additional interview
+          data, the prototype mockups, and the visual identity. The pivot from "food
+          map" to "neighbor network" was a team conclusion drawn directly from user testing.
+        </p>
+      </div>
+      <div class="col">
+        <h4>What I Learned</h4>
+        <ul>
+          <li>The <em>highest-rated concept</em> isn't always the right one. The why behind a score matters more than the score itself.</li>
+          <li>Emotional resilience and logistical resilience are not separate problems. People asked for inventory data; what they actually wanted was reassurance.</li>
+          <li>Design for the calm. Trust-building happens before the crisis, not during it — anything else is too late.</li>
+          <li>Verification is a design material. The same friction that protects users also signals seriousness, and that signal is part of the value.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="takeaway">
+      <div class="tlabel">Closing</div>
+      <h4>
+        Even minor disruptions can escalate into widespread inefficiency and inequality.
+        The issue is not resource scarcity — it is the <em>absence of coordination
+        and trust at the local level.</em> NeighborHub is an attempt to design
+        that coordination into the city before it's needed.
+      </h4>
+    </div>
+  </div>
+
+  <!-- ============= PROJECT 02 — COAT ============= -->
+  <div id="coat-design" class="project">
+    <div class="project-header">
+      <span class="pnum">02 — Co-design</span>
+      <h3>The <em>Effortless Elegant</em> Winter Coat</h3>
+      <span class="ptype">Co-design Exercise<br />Individual</span>
+    </div>
+
+    <div class="feature-hero">
+      <div>
+        <p class="feature-tagline">
+          A winter coat designed <strong>for and with</strong> a master's student
+          balancing academic, social, and professional life in NYC.
+        </p>
+        <p class="feature-desc">
+          The brief was small in scope but rich in method: design a single coat for
+          one specific person, then iterate it through a structured co-design
+          conversation — first an original sketch, then an AI-generated variation,
+          then a final design produced together with the client. The point wasn't
+          the coat. The point was watching a person's preferences sharpen against
+          two alternatives.
+        </p>
+        <div class="pill-row">
+          <span class="pill solid">Co-design</span>
+          <span class="pill">Sketching</span>
+          <span class="pill">Client Interview</span>
+          <span class="pill">Iteration</span>
+        </div>
+      </div>
+
+      <div class="sketch-frame">
+        <span class="sk-label">Client Brief</span>
+        <div style="margin-top:24px;">
+          <div style="font-family:'Fraunces',serif;font-size:22px;font-weight:500;margin-bottom:18px;letter-spacing:-0.01em;">
+            "I want one coat that works everywhere — class, dinner, an office visit —
+            and I want to grab it and go without thinking."
+          </div>
+          <div style="display:grid;grid-template-columns:auto 1fr;gap:10px 18px;font-size:13.5px;color:var(--ink-soft);">
+            <span style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:0.1em;color:var(--muted);text-transform:uppercase;align-self:center;">Need</span>
+            <span>Extreme warmth, lightweight, large pockets.</span>
+            <span style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:0.1em;color:var(--muted);text-transform:uppercase;align-self:center;">Want</span>
+            <span>One versatile, light-colored coat. Easy mornings.</span>
+            <span style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:0.1em;color:var(--muted);text-transform:uppercase;align-self:center;">Aspire</span>
+            <span>Mature, polished, calm. Warm without bulk.</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <h4 style="font-family:'Fraunces',serif;font-size:24px;font-weight:400;margin-bottom:24px;letter-spacing:-0.015em;">
+      Three rounds, one direction
+    </h4>
+
+    <div class="coat-grid">
+      <div class="coat-card">
+        <div class="stage-tag">Round 01 · Original</div>
+        <h4>Hand sketch</h4>
+        <p>
+          Mid-length, structured wool-blend shell with a built-in scarf collar, a
+          defined waist seam, and four functional pockets inspired by the Chanel
+          field-jacket silhouette.
+        </p>
+        <ul>
+          <li>Built-in scarf collar (no lost scarves)</li>
+          <li>Hidden insulated lining</li>
+          <li>Sand color, structured but soft</li>
+          <li>Mid-length silhouette</li>
+        </ul>
+      </div>
+
+      <div class="coat-card">
+        <div class="stage-tag">Round 02 · AI Variation</div>
+        <h4>Generated alternative</h4>
+        <p>
+          Same brief, run through an image-generation model to produce a more utility-
+          forward interpretation — hood, drawcord waist, sleeve cargo pockets, buckled cuffs.
+        </p>
+        <ul>
+          <li>Structured hood (added)</li>
+          <li>Adjustable drawcord waist</li>
+          <li>Sleeve cargo pockets</li>
+          <li>Buckled cuff straps</li>
+        </ul>
+      </div>
+
+      <div class="coat-card highlight">
+        <div class="check">✓</div>
+        <div class="stage-tag">Round 03 · Co-design</div>
+        <h4>Final, together</h4>
+        <p>
+          Side-by-side review with the client surfaced a clear preference: keep the
+          minimal base, borrow only the structural details that earned their place.
+        </p>
+        <ul>
+          <li>Open lapel + integrated scarf</li>
+          <li>Structured belted waist (replaces drawcord)</li>
+          <li>Cuff strap detail (kept)</li>
+          <li>Hood &amp; sleeve pockets removed</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="takeaway">
+      <div class="tlabel">What surprised me</div>
+      <h4>
+        The client wasn't choosing between two coats — she was choosing between
+        two <em>moods of mornings</em>. The AI version felt like getting ready
+        for a hike. The original felt like getting ready for a meeting. The final
+        coat is the one she'd actually grab without thinking — which was the
+        original brief all along.
+      </h4>
+    </div>
+  </div>
+
+  <!-- ============= PROJECT 03 — COFFEE TABLE ============= -->
+  <div id="coffee-table" class="project">
+    <div class="project-header">
+      <span class="pnum">03 — Object Design</span>
+      <h3>The <em>Lift-Top</em> Coffee Table</h3>
+      <span class="ptype">Furniture Design Exercise<br />Individual</span>
+    </div>
+
+    <div class="coffee-grid">
+      <div>
+        <p class="feature-tagline" style="margin-bottom:24px;">
+          Designing a single piece of furniture that supports <strong>working,
+          eating, and hosting</strong> in a small NYC apartment.
+        </p>
+        <p class="feature-desc">
+          The exercise: imagine the constraints of living alone in a small Manhattan
+          apartment — limited square footage, flexible work habits, occasional guests —
+          and design a single piece of furniture that does more than one thing
+          without looking like it's doing more than one thing.
+        </p>
+        <p class="feature-desc">
+          The lift-top mechanism transforms the surface from coffee-table height to
+          dining/working height. Two side compartments offer hidden storage to reduce
+          visual clutter. The rounded oval edges and warm wood-fluted sides make the
+          piece feel safe, calm, and home-like — the goal was to make a small
+          apartment feel less like a cell and more like a place.
+        </p>
+        <div class="pill-row">
+          <span class="pill solid">Furniture</span>
+          <span class="pill">Multi-functional</span>
+          <span class="pill">Small-space living</span>
+          <span class="pill">Sketching</span>
+        </div>
+      </div>
+
+      <div class="sketch-frame">
+        <span class="sk-label">Why this</span>
+        <div style="margin-top:28px;display:flex;flex-direction:column;gap:18px;">
+          <div>
+            <div style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:0.1em;color:var(--orange);text-transform:uppercase;margin-bottom:6px;">01 · Lift-top surface</div>
+            <p style="font-size:14.5px;color:var(--ink-soft);line-height:1.55;">
+              Combines work, storage, dining, aesthetics. Saves space; supports
+              flexible work habits; makes the user feel supported rather than
+              cornered.
+            </p>
+          </div>
+          <div>
+            <div style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:0.1em;color:var(--orange);text-transform:uppercase;margin-bottom:6px;">02 · Hidden storage</div>
+            <p style="font-size:14.5px;color:var(--ink-soft);line-height:1.55;">
+              Keeps items out of sight. The visual quiet helps the room feel calmer
+              and more ordered — the apartment becomes restful instead of cluttered.
+            </p>
+          </div>
+          <div>
+            <div style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:0.1em;color:var(--orange);text-transform:uppercase;margin-bottom:6px;">03 · Generous size</div>
+            <p style="font-size:14.5px;color:var(--ink-soft);line-height:1.55;">
+              Large enough to invite friends over. Living alone in NYC, that
+              hospitality is what turns a unit into a home.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="takeaway" style="margin-top:60px;">
+      <div class="tlabel">The thread across all three projects</div>
+      <h4>
+        A coat, a table, a neighborhood platform. On the surface they have nothing
+        in common. Underneath, they're all asking the same question:
+        <em>how do you design something that lets a person feel a little more at
+        home in the city?</em>
+      </h4>
+    </div>
+  </div>
+</section>
+
+<!-- ────────── FOOTER ────────── -->
+<footer id="contact">
+  <div class="ftop">
+    <h2>Let's <em>talk</em>.<br />I'm always open to a conversation.</h2>
+    <div class="fmeta">
+      <div style="font-family:'Inter Tight',sans-serif;font-weight:500;font-size:13px;color:var(--cream);text-transform:uppercase;letter-spacing:0.15em;margin-bottom:12px;">Get in touch</div>
+      <div>Email · <a href="mailto:dongxia011108@gmail.com">dongxia011108@gmail.com</a></div>
+      <div>LinkedIn · <a href="#">linkedin.com/in/dongxia</a></div>
+      <div>Based in New York City</div>
+    </div>
+  </div>
+  <div class="fbottom">
+    <div>© 2026 Dong Xia · HCDI Portfolio</div>
+    <div>Columbia Engineering · Section 2 · Team 13</div>
+  </div>
+</footer>
+
+<script>
+  // reveal-on-scroll
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('in');
+        observer.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.12 });
+  document.querySelectorAll('.work-overview, .project, .about-grid, .feature-list, .takeaway, .compare, .journey, .flow-grid, .coat-grid')
+    .forEach(el => { el.classList.add('reveal'); observer.observe(el); });
+</script>
+
+</body>
+</html>
